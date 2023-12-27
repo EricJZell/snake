@@ -16,6 +16,7 @@ body {
 
 .goal {
   background-color: #457b9d;
+  border-radius: 8px;
 }
 
 .snake {
