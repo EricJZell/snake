@@ -16,12 +16,12 @@ body {
 
 .goal {
   background-color: #457b9d;
-  border-radius: 8px;
 }
 
 .snake {
-  background-color: black;
-  border-radius: 4px;
+  background-color: green;
+  border: 1px solid black;
+  margin: -1px;
 }
 
 .obstacle {

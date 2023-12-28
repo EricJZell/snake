@@ -36,7 +36,7 @@
       </ul>
     </div>
     <div class="grid-container">
-      <div v-for="(box, index) in boardArea" :class="board[index]" class="grid-item"></div>
+      <div v-for="(box, index) in boardArea" :class="classAt(index)" class="grid-item"></div>
     </div>
   </div>
 </body>

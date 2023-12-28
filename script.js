@@ -4,7 +4,6 @@ const app = new Vue({
       boardWidth: 30,
       boardArea: null,
       snake: null,
-      board: [],
       goal: null,
       score: 0,
       obstacleCount: 5,
@@ -18,16 +17,23 @@ const app = new Vue({
       this.start();
     },
     methods: {
+      classAt(index) {
+        if (this.snake.body.includes(index)) {
+          return 'snake';
+        } else if (this.obstacles.includes(index)){
+          return 'obstacle';
+        } else if (this.goal == index) {
+          return 'goal'
+        }
+        return null;
+      },
       reset() {
-        this.board = new Array(this.boardArea);
         this.score = 0;
         this.snake = { direction: null, body: [this.startingCoordinate] };
-        Vue.set(this.board, this.startingCoordinate, 'snake');
         this.obstacles = [];
         for (var i = 0; i < this.obstacleCount; i++) {
           var obstacle = Math.floor(Math.random() * this.boardArea);
           this.obstacles.push(obstacle);
-          Vue.set(this.board, obstacle, 'obstacle');
         }
         this.setGoal();
       },
@@ -37,7 +43,7 @@ const app = new Vue({
         clearInterval(this.interval);
         this.interval = setInterval(function() {
           app.updateSnake();
-        }, 125);
+        }, 100);
         this.$refs.button.focus();
       },
       stop() {
@@ -48,7 +54,6 @@ const app = new Vue({
         do {
           this.goal = Math.floor(Math.random() * this.boardArea);
         } while (this.snake.body.includes(this.goal) || this.obstacles.includes(this.goal));
-        Vue.set(this.board, this.goal, 'goal');
       },
       processUserInput($event) {
         var newDirection = $event.key;
@@ -62,15 +67,15 @@ const app = new Vue({
           clearInterval(this.interval);
           this.interval = setInterval(function() {
             app.updateSnake();
-          }, 125);
+          }, 100);
         }
       },
       updateSnake() {
         var delta;
-        if (this.snake.direction === 'ArrowRight') { delta = 1; }
-        else if (this.snake.direction === 'ArrowLeft') { delta = -1; }
-        else if (this.snake.direction === 'ArrowUp') { delta = -this.boardWidth; }
-        else if (this.snake.direction === 'ArrowDown') { delta = this.boardWidth; }
+        if (this.snake.direction == 'ArrowRight') { delta = 1; }
+        else if (this.snake.direction == 'ArrowLeft') { delta = -1; }
+        else if (this.snake.direction == 'ArrowUp') { delta = -this.boardWidth; }
+        else if (this.snake.direction == 'ArrowDown') { delta = this.boardWidth; }
         else { return; }
         var newHeadCoordinate = this.snake.body.slice(-1)[0] + delta;
         if (this.obstacles.includes(newHeadCoordinate) || this.snake.body.includes(newHeadCoordinate)) {
@@ -84,10 +89,8 @@ const app = new Vue({
             this.score++;
             this.setGoal();
           } else {
-            delete this.board[this.snake.body[0]];
             this.snake.body.shift();
           }
-          Vue.set(this.board, newHeadCoordinate, 'snake');
           this.snake.body.push(newHeadCoordinate);;
         }
       }
