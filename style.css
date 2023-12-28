@@ -8,23 +8,23 @@ body {
   height: 500px;
   width: 500px;
   border: 5px solid #a8dadc;
-}
-
-.grid-item {
   background-color: #f1faee;
 }
 
 .goal {
   background-color: #457b9d;
+  border-radius: 50%;
 }
 
 .snake {
   background-color: green;
+  border-radius: 5px;
   box-shadow:inset 0px 0px 0px 1px black;
 }
 
 .obstacle {
-  background-color: #e63946
+  background-color: #e63946;
+  border-radius: 50%;
 }
 
 .scores {
