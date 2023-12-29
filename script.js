@@ -25,7 +25,7 @@ const app = new Vue({
         })
         .then(data => {
           // The request was successful, and the response is available in the 'data' variable
-          console.log(data);
+          this.highScores = JSON.parse(data)
         })
         .catch(error => {
           // Handle errors
