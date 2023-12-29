@@ -10,11 +10,27 @@ const app = new Vue({
       obstacles: [],
       interval: null,
       scores: [],
-      startingCoordinate: 0
+      startingCoordinate: 0,
+      highScores: []
     },
     mounted: function() {
       this.boardArea = this.boardWidth ** 2;
       this.start();
+      fetch('https://1k3lc77m4g.execute-api.us-east-1.amazonaws.com/scores')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then(data => {
+          // The request was successful, and the response is available in the 'data' variable
+          console.log(data);
+        })
+        .catch(error => {
+          // Handle errors
+          console.error('Error:', error);
+        });
     },
     methods: {
       classAt(index) {
