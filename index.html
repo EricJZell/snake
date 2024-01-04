@@ -25,7 +25,7 @@
     <div class="scores">
       <h3>Instructions:</h3>
       <ul>
-        <li>You are the black dot. Control it with the arrow keys on your keyboard.</li>
+        <li>You are the Green dot. Control it with the arrow keys on your keyboard.</li>
         <li>The teal dot is the goal. Navigate to it.</li>
         <li>The red dots are obstacles. Avoid them.</li>
       </ul>
@@ -36,7 +36,9 @@
       </ul>
       <h3 v-if="highScores.length">All Time High Scores:</h3>
       <ol>
-        <li v-for="s in highScores">{{ s.player_name }}: {{ s.score }}</li>
+        <li v-for="s in highScores">
+          <strong>{{ s.player_name }}</strong>: <span>{{ s.score }}</span>
+        </li>
       </ol>
     </div>
     <div class="grid-container">

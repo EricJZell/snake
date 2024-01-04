@@ -34,3 +34,7 @@ body {
 button {
   margin: 10px;
 }
+
+ol li {
+  margin: 5px;
+}
