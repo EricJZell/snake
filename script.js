@@ -11,12 +11,13 @@ const app = new Vue({
       interval: null,
       scores: [],
       startingCoordinate: 0,
-      highScores: []
+      highScores: [],
+      apiURL: 'https://1k3lc77m4g.execute-api.us-east-1.amazonaws.com/scores'
     },
     mounted: function() {
       this.boardArea = this.boardWidth ** 2;
       this.start();
-      fetch('https://1k3lc77m4g.execute-api.us-east-1.amazonaws.com/scores')
+      fetch(this.apiURL)
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -25,7 +26,7 @@ const app = new Vue({
         })
         .then(data => {
           // The request was successful, and the response is available in the 'data' variable
-          this.highScores = JSON.parse(data)
+          this.highScores = JSON.parse(data).sort((a, b) => b.score - a.score);
         })
         .catch(error => {
           // Handle errors
@@ -97,6 +98,25 @@ const app = new Vue({
         if (this.obstacles.includes(newHeadCoordinate) || this.snake.body.includes(newHeadCoordinate)) {
           this.stop();
           this.scores.push(this.score);
+          let [lowestHighScore] = this.highScores.slice(-1);
+          if (this.score > lowestHighScore.score) {
+            let name = prompt('You got a high score! Enter your name:');
+            let data = { player_name: name, score: this.score, timestamp: Date.now(), game_version: '0.0.1' };
+            fetch(this.apiURL, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            }).then(response => {
+              if (!response.ok) {
+                console.log(response);
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              this.highScores.push(data);
+              this.highScores.sort((a, b) => b.score - a.score);
+            })
+          }
           this.reset();
           alert('game over');
         }
