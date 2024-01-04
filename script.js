@@ -56,10 +56,10 @@ const app = new Vue({
       },
       start() {
         this.reset();
-        var app = this;
+
         clearInterval(this.interval);
-        this.interval = setInterval(function() {
-          app.updateSnake();
+        this.interval = setInterval(() =>{
+          this.updateSnake();
         }, 100);
         this.$refs.button.focus();
       },
