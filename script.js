@@ -117,9 +117,11 @@ const app = new Vue({
               this.highScores.sort((a, b) => b.score - a.score);
               return true;
             })
+            this.reset()
+          } else {
+            this.reset();
+            alert('game over');
           }
-          this.reset();
-          alert('game over');
         }
         else {
           if (newHeadCoordinate === this.goal) {
