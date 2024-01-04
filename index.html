@@ -35,9 +35,9 @@
         <li v-for="s in scores">{{ s }}</li>
       </ul>
       <h3 v-if="highScores.length">All Time High Scores:</h3>
-      <ul>
+      <ol>
         <li v-for="s in highScores">{{ s.player_name }}: {{ s.score }}</li>
-      </ul>
+      </ol>
     </div>
     <div class="grid-container">
       <div v-for="(box, index) in boardArea" :class="classAt(index)" class="grid-item"></div>

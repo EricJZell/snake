@@ -26,7 +26,7 @@ const app = new Vue({
         })
         .then(data => {
           // The request was successful, and the response is available in the 'data' variable
-          this.highScores = JSON.parse(data).sort((a, b) => b.score - a.score);
+          this.highScores = JSON.parse(data).sort((a, b) => b.score - a.score).slice(0, 10);
         })
         .catch(error => {
           // Handle errors
@@ -115,6 +115,7 @@ const app = new Vue({
               }
               this.highScores.push(data);
               this.highScores.sort((a, b) => b.score - a.score);
+              return true;
             })
           }
           this.reset();
