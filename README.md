@@ -22,3 +22,4 @@ To run this app locally, run `$ ws --spa index.html`
 - Update to a production application by building all necessary files
 - Get classic-snake-game.com domain
 
+Update the codepipeline to upload the dist directory to S3
