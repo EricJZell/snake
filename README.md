@@ -13,3 +13,12 @@ To test the API Gateway/ Lambda, run:
 `curl -X "POST" -H "Content-Type: application/json" -d "{\"score\": 13, \"player_name\": \"ezell\"}" https://1k3lc77m4g.execute-api.us-east-1.amazonaws.com/scores`
 
 You can then visit https://1k3lc77m4g.execute-api.us-east-1.amazonaws.com/scores in your browser to check the score has been created.
+
+To run this app locally, run `$ ws --spa index.html`
+
+# TODO
+- Configure CloudFront as CDN and enable SSL
+- Use an HTML form to enter name, with validations
+- Update to a production application by building all necessary files
+- Get classic-snake-game.com domain
+

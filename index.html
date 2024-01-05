@@ -1,49 +1,14 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-
-  <title>Snake Game</title>
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="style.css">
-  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js' defer></script>
-  <script src="script.js" defer></script>
-</head>
-
-<body>
-  <div id="app">
-    <h3>
-      Welcome to Classic Snake Game, written with Vue.js!
-      <button
-        @click="start"
-        ref="button"
-        v-on:keydown='processUserInput($event)'
-      >Set Board for a New Game</button>
-    </h3>
-
-    <div class="scores">
-      <h3>Instructions:</h3>
-      <ul>
-        <li>You are the Green dot. Control it with the arrow keys on your keyboard.</li>
-        <li>The teal dot is the goal. Navigate to it.</li>
-        <li>The red dots are obstacles. Avoid them.</li>
-      </ul>
-      <h1>Current score: {{ score  }}</h1>
-      <h3 v-if="scores.length">Your Recent Scores:</h3>
-      <ul>
-        <li v-for="s in scores">{{ s }}</li>
-      </ul>
-      <h3 v-if="highScores.length">All Time High Scores:</h3>
-      <ol>
-        <li v-for="s in highScores">
-          <strong>{{ s.player_name }}</strong>: <span>{{ s.score }}</span>
-        </li>
-      </ol>
-    </div>
-    <div class="grid-container">
-      <div v-for="(box, index) in boardArea" :class="classAt(index)" class="grid-item"></div>
-    </div>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🐍</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Snake</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
+
