@@ -17,9 +17,7 @@ You can then visit https://1k3lc77m4g.execute-api.us-east-1.amazonaws.com/scores
 To run this app locally, run `$ ws --spa index.html`
 
 # TODO
-- Configure CloudFront as CDN and enable SSL
-- Use an HTML form to enter name, with validations
-- Update to a production application by building all necessary files
+- Add CI/CD to deploy on push to main branch
 - Get classic-snake-game.com domain
 
 Update the codepipeline to upload the dist directory to S3
