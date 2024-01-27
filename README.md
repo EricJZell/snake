@@ -1,23 +1,22 @@
 # Snake Game
 + By: Eric Zell
-+ Production URL: <http://snake.ericjzell.com>
++ Production URL: <https://snake.ericjzell.com>
 
 ## Outside resources
-- [CSS Grid Layout](https://www.w3schools.com/css/css_grid.asp)
-- [Color Palette From coolors.co](https://coolors.co/palettes/trending)
-- [Index attribute in v-for](https://forum.vuejs.org/t/index-attribute-in-v-for/4039)
+- [Hero Patterns](https://heropatterns.com/)
 
 ## Serverless Architecture
-This uses AWS Lambda, API Gateway, and DynamoDB as a serverless architecture.
-To test the API Gateway/ Lambda, run:
-`curl -X "POST" -H "Content-Type: application/json" -d "{\"score\": 13, \"player_name\": \"ezell\"}" https://1k3lc77m4g.execute-api.us-east-1.amazonaws.com/scores`
+This app uses AWS Lambda, API Gateway, S3, and DynamoDB as a serverless architecture.
+Cloudfront is used for SSL termination, but also as a CDN. A CNAME record in my DNS points to
+the Cloudfront distribution, which has the S3 bucket set as the origin.
 
-You can then visit https://1k3lc77m4g.execute-api.us-east-1.amazonaws.com/scores in your browser to check the score has been created.
-
-To run this app locally, run `$ ws --spa index.html`
+To run this app locally, run `npm run dev`
+To deploy, run `nmp run build` locally, then upload the contents of the resulting
+`dist` directory to S3. *You will need to invalidate the CDN cache in Cloudfront before
+you will see changes live in prouction*
 
 # TODO
 - Add CI/CD to deploy on push to main branch
-- Get classic-snake-game.com domain
 
-Update the codepipeline to upload the dist directory to S3
+
+
