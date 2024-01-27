@@ -1,33 +1,41 @@
 <template>
   <div @click="switchFocus">
-    <h3>
-      Welcome to Classic Snake Game, created with Vue.js!
-      <button
-        @click="start"
-        ref="button"
-        v-on:keydown='processUserInput($event)'
-      >Set Board for a New Game</button>
-    </h3>
-
-    <div class="scores">
-      <h3>Instructions:</h3>
-      <ul>
-        <li>You are the Green dot. Control it with the arrow keys on your keyboard.</li>
-        <li>The teal dot is the goal. Navigate to it.</li>
-        <li>The red dots are obstacles. Avoid them.</li>
-      </ul>
-      <h1>Current score: {{ score  }}</h1>
-      <h3 v-if="scores.length">Your Recent Scores:</h3>
-      <ul>
-        <li v-for="s in scores">{{ s }}</li>
-      </ul>
-      <h3 v-if="highScores.length">All Time High Scores:</h3>
-      <ol>
-        <li v-for="s in highScores">
-          <strong>{{ s.player_name }}</strong>: <span>{{ s.score }}</span>
-        </li>
-      </ol>
+    <h1>
+      Play Classic Snake Game for Free. Compete for the high score!
+    </h1>
+    <div class="container">
+      <div class="column game-area">
+        <button
+            @click="start"
+            ref="button"
+            v-on:keydown='processUserInput($event)'>
+          Set Board for a New Game
+        </button>
+        <div class="grid-container">
+          <div v-for="(box, index) in boardArea" :class="classAt(index)" class="grid-item"></div>
+        </div>
+      </div>
+      <div class="column scores">
+        <h3>Instructions:</h3>
+        <ul>
+          <li>You are the Green dot. Control it with the arrow keys on your keyboard.</li>
+          <li>The teal dot is the goal. Navigate to it.</li>
+          <li>The red dots are obstacles. Avoid them.</li>
+        </ul>
+        <h3>Current score: {{ score  }}</h3>
+        <h3 v-if="scores.length">Your Recent Scores:</h3>
+        <ul>
+          <li v-for="s in scores">{{ s }}</li>
+        </ul>
+        <h3 v-if="highScores.length">All Time High Scores:</h3>
+        <ol>
+          <li v-for="s in highScores">
+            <strong>{{ s.player_name }}</strong>: <span>{{ s.score }}</span>
+          </li>
+        </ol>
+      </div>
     </div>
+
     <div v-show="gameOver" class="modal">
       <div class="modal-content">
         <h1>Game Over</h1>
@@ -42,9 +50,6 @@
         </div>
         <button v-else @click="start">Play Again</button>
       </div>
-    </div>
-    <div class="grid-container">
-      <div v-for="(box, index) in boardArea" :class="classAt(index)" class="grid-item"></div>
     </div>
   </div>
 </template>
@@ -124,7 +129,7 @@ export default {
       clearInterval(this.interval);
       this.interval = setInterval(() =>{
         this.updateSnake();
-      }, 100);
+      }, 125);
       this.$refs.button.focus();
     },
     stop() {
@@ -152,7 +157,7 @@ export default {
         clearInterval(this.interval);
         this.interval = setInterval(() => {
           this.updateSnake();
-        }, 100);
+        }, 125);
       }
     },
     submitHighScore() {
